@@ -1,0 +1,24 @@
+JavaScript - Douglas Crockford Lectures
+1. Automatic semicolon insertion - causes functions to returned undefined when starting { is not on same line as function keyword!
+2. Only one number type (which is a double) which causes problems when dealing with money (i.e. the fractions are approximated values).  The decimal number type would have been a better choice.  Numbers are objects in JS -- which they are not in many languages.  You can add methods to the number object.
+3. JS uses a disposable Math object (bad idea borrowed from Java).  Would have been better if they had been methods on the number object.
+4. NaN (Not a Number) is a number which is a result of invalid math operations.  Any math operation with Nan as an input will have NaN as an output.  NaN is not equal to NaN. (NaN is not equal to anything).
+5. JS has an Infinity number type.  So if x = infinity, then (x === x + 1).  Also Number.MAX_VALUE + 1 === Number.MAX_VALUE
+6. + does both addition and concatenation - which leads to many errors. + operatator is also used to convert a string to a number.  (e.g. num = +str;)  You can force strings to be numbers before adding (e.g. +"3" + (+"4") = 7)
+7. parseInt will stop converting once a non-numeric value is detected.  But will not tell you where it stopped, or that it stopped early.  Also problematic if any number being converted starts with leading zeros -- as they are assumed to be in octal (so always use the 10 radix to tell it to use base 10).
+8. Be sure not to put "new" in front of string function, that does something completely different.  Douglas does not ever use the "new" keyword anymore.
+9. Strings are objects.  They have lots of methods. String has length property indicating how many 16-bit characters are in the string (extended characters are counted as 2).
+10. JS does not use "real" arrays, which are contiguous, equal sized area of memory for storing data.  Instead JS arrays are based on objects.  The array indexers are convert to strings, then their hashed value is used to index into the object which is backing the array.  Effecient for sparse arrays (i.e. where most of the cells are empty), but not very efficient in most cases.  One advantage is you do not need to provide a length or type when creating an array (so JS arrays can grow until memory is exhausted).
+11. Arrays have a length property which is set to the highest subscript value + 1 (not the number of elments in the array), soyou can append to an array with myArray[myArray.length] = 'a new value';  Should always use the bracket notation with arrays because the dot notation gets confused with numbers.
+12. JS has a sort method for arrays, but it does a character sort unless you pass in a comparator function.
+13. When you delete an element from an array it leaves a hole in the array.  You have to use the "splice" command to remove the hole.
+14. The only two values in JS which are not objects are "null" and "undefined".
+15. "undefined" values are used for variables that are not initialized (i.e. they were declared but not initialized).  You can assign undefined to a variable -- but don't as it causes confusion.
+16.  JS is "loosely -type" language, but it contains a lot of types.
+17.  && is the "guard operator".  If first operand is truthy, then result is second operand, else result is first operand (e.g. return a && a.member);  The guard operator is used to avoid null pointer exceptions.
+var getUsername = function() {
+    return loggedIn && username;
+}
+18.  || is the "default" operator which is the opposite of the guard operator.  It can be used to fill in default values. If first operand is truthy then result is the first operand, else result is second operand.
+19. "!"  is the logical not operator.  It can be used to create a boolean -- if used twice it turns a truthy value into true, or a falsely value into false.
+20. JS has bitwise operators.  Since JS does not have an int data type, it takes it's 64-bit floating point and converts it into a 32-bit signed integer, performs the bitwise operator, and then converts it back to a 64-bit floating point.
