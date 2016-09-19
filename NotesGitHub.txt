@@ -26,3 +26,5 @@
 	  (git commit -m "Updated Git.txt")
 	- push change to GitHub 
 	  (git push -u origin master)
+
+git remote add origin https://github.com/KevinEHarris/Notes.git
