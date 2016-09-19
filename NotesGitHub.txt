@@ -1,0 +1,28 @@
+--------------- Git Local Repositories ---------------------------------------
+
+1. Check in changes to local repo
+	A. check status to see if files have changed
+ 	  (git status)
+	B. Begin tracking new files or stage modified files
+	  (git add filename)
+	   Note: the modified file appears in green when staged (read for check in).
+	C. Remove files
+	   (git add filename)	  
+	D. commit changes
+ 	  (git commit -m "comments here")
+	E. check git log for change messages
+	  (git log)
+
+
+--------------- Git Hub ---------------------------------------
+
+1. Push changes from local repository to GitHub
+	- make changes on local files
+	- check status of local repo 
+	  (git status) {Changes not staged for commit}
+	- moved changed files to staging 
+	  (git add <filename>) {Changes to be committed:}
+	- commit changes locally 
+	  (git commit -m "Updated Git.txt")
+	- push change to GitHub 
+	  (git push -u origin master)

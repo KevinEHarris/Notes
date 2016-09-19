@@ -1,0 +1,59 @@
+Notes: Encryption
+9/18/2016
+
+
+A. Secure Communication with a one-time pad
+- appliction used to introduce basic prinicples of computation is from cryptophy and is called Secure Communications with a One-Time Pad (OTP).
+- This encryption process pairs the plain text message with a random series of bits (OTP, aka Secret Key).  The bits from the plain text
+message and secret key are XORed (bitwise exclusive or) to create the cipher text.  The cipher text is decrypted by XORing with the 
+secret key.  So sender and receiver must both have the exact same secret key (i.e. cryptographic key).
+- the cryptographic key must be a random sequence (of bits).  It is more convenient to decode the random bits into a sequence of characters,
+so the random sequence of bits appear as character encoded data.
+- example usage is a phone chat application where the encrypted message is sent "in the clear" (anyone can read it).
+- character Eve (the evesdropper) can see the encrypted message, but can not decrypt without the key.
+- today all data is digitally encoded because the two states can be easily realized in the physical world, various physical mediums.
+- i.e. today all media (music, movies, messages, programs) is send as a series of bits
+
+- Base64 encoding (6 bits)  64 symbols (A-Z, a-z, 0-9, +, /)
+- ASCII encoding (8 bits) 256 symbols
+- UniCode (16 bits) 65,536+ symbols
+
+- cipher text is send in the clear, cryptographic clear is send through a secure channel.
+- One-Time Pad (OTP) is proven unbreakable if bits are truly random.
+- OTP is widely used in practice.  Simple method. Encrypt/Decrypt with same machine.
+- OTP problem is bits must be random - not possible with computers (but can approximate with pseudo-random numbers).
+- OTP problem key must be as long as the message (so use LFSR to use short key).
+- random.org site uses atmospheric noise to generate random integer values. (May not be best source of random bits, use if you trust 
+the Internet).
+
+B. Linear Feedback Shift Registers
+- Linear Feedback Shift Register (LFSR) - method used to generate long sequence of random bits from a short key.
+- deterministic - given the current state, we can determine what next state will be, opposite of random
+- pseudo-random number generator - a determinitic machine that produces long sequence of pseudo random bits.
+- Enigma was an example of a pseudo-random number generator.
+- John von Neumann - "Anyone who considers arithmetical methods of producting random digits is, of course, in a state of sin".
+- on computer we can not achieve the state of randomness, but can approximate so people can not tell the difference.
+- LSFR Terms
+Seed: initial sequence of bits, short, only number of bits in register.
+Feedback: XOR of two bits, put result at right
+Cell: storage element holds one bit
+Register: sequence of cells 
+Each time clock ticks, shift register one position to the left, new value created on right from XOR of leftmost and leftmost - x bits.
+Taps: bit positions used for XOR (one must be leftmost)
+[N,k] LFSR N=number of bits with taps at N and k.  Note: not all values of k produce desired results.
+- If both sender and receiver use the same seed value, they can both produce the same series of pseudo random bits (used in OTP)
+- Seed can not be all zeros. Random bits (fill) will repeat determining on factors.  Eg. taps [4,2] repeat after 8 bits.
+Need theory of finite groups to determine good tap positions.
+- [11,9] generates 2047 bits before repeating
+- [63,62] generates 2 to 63rd - 1 bits before repeating (so, 64-bit encryption preferred over 12 bit).
+- If Eve could check 1 million seeds per second, it would take 2923 centuries to try them all.
+- Exponential growth drawfs technology improvements. Every bit added doubles the work for Eve.
+- Experts have cracked LFSR encryption (with a lot of work), still need secure key distribution, easily breakable if seed is reused.
+
+
+
+
+
+
+
+
